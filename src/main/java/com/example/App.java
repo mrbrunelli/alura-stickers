@@ -1,15 +1,13 @@
 package com.example;
 
-import java.net.http.HttpResponse;
+import java.util.List;
 
 public class App {
     public static void main(String[] args) throws Exception {
-        Http http = new Http();
-        HttpResponse<String> response = http.get("https://fake-movie-database-api.herokuapp.com/api?s=Batman");
+        GetMovies getMovies = new GetMovies(new HttpImplementation(), new JsonParserImplementation());
+        List<Movie> movies = getMovies.execute();
 
-        MovieResponse movieResponse = JsonParser.parse(response.body(), MovieResponse.class);
-
-        for (Movie movie : movieResponse.search) {
+        for (Movie movie : movies) {
             System.out.println(movie.title);
             System.out.println(movie.poster);
             System.out.println(movie.year);

@@ -14,9 +14,11 @@ class MyObject {
 public class JsonParserTest {
     @Test
     public void shouldParseJson() {
-        String json = "{ \"key\": \"value\" }";
-        MyObject parsed = JsonParser.parse(json, MyObject.class);
+        JsonParser sut = new JsonParserImplementation();
 
-        assertEquals(parsed.field, "value");
+        String json = "{ \"key\": \"value\" }";
+        MyObject result = sut.parse(json, MyObject.class);
+
+        assertEquals(result.field, "value");
     }
 }
